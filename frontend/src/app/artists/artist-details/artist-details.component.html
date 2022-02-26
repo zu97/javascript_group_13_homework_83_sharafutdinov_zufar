@@ -1,0 +1,37 @@
+<div class="alert alert-danger" *ngIf="error | async">
+  {{ error | async }}
+</div>
+
+<app-loader [isLoading]="isLoading | async">
+  <div class="card mb-3" *ngIf="artist | async as $artist">
+    <div class="row no-gutters">
+      <div class="col-md-auto">
+        <img class="card-img-top artist-img"
+             [src]="apiUrl + '/uploads/' + $artist.image"
+             [alt]="$artist.name"
+        />
+      </div>
+      <div class="col-md">
+        <div class="card-body">
+          <h5 class="card-title">{{ $artist.name }}</h5>
+          <p class="card-text">{{ $artist.information }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-3 mb-3 border rounded text-center">
+    <strong>Albums</strong>
+  </div>
+
+  <div class="row row-cols-md-4">
+    <div class="col mb-3" *ngFor="let album of albums | async">
+      <div class="card">
+        <img class="card-img-top" [src]="apiUrl + '/uploads/' + album.image" [alt]="album.name"/>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ album.name }} <small>({{ album.year }})</small></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-loader>

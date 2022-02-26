@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { LoaderComponent } from './ui/loader/loader.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistItemComponent } from './artists/artist-item/artist-item.component';
+import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ArtistItemComponent } from './artists/artist-item/artist-item.component
     PageNotFoundComponent,
     LoaderComponent,
     ArtistsComponent,
-    ArtistItemComponent
+    ArtistItemComponent,
+    ArtistDetailsComponent
   ],
   imports: [
     BrowserModule,

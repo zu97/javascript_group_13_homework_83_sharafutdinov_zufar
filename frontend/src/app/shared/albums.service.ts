@@ -22,7 +22,7 @@ export class AlbumsService {
         const albums = result.albums.map((data) => {
           return new Album(data._id, data.artist, data.name, data.image, data.year);
         });
-        
+
         return { artist, albums };
       }));
   }
