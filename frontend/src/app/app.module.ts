@@ -5,6 +5,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { artistsReducer } from './store/artists.reducer';
+import { ArtistsEffects } from './store/artists.effects';
+
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { LoaderComponent } from './ui/loader/loader.component';
@@ -17,8 +20,8 @@ import { LoaderComponent } from './ui/loader/loader.component';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({artists: artistsReducer}, {}),
+    EffectsModule.forRoot([ArtistsEffects]),
     AppRoutingModule,
     HttpClientModule
   ],
