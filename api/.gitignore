@@ -1,3 +1,12 @@
 node_modules
 .idea
 public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/michael-jackson.jpg
+!public/uploads/boney-m.jpg
+!public/uploads/alizee.jpg
+!public/uploads/thriller.jpg
+!public/uploads/christmas.jpg
+!public/uploads/nightflight.jpg
+!public/uploads/gourmandises.jpg
+!public/uploads/tout.jpg
