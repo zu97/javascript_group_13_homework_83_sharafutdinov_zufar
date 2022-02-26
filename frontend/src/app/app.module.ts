@@ -11,12 +11,16 @@ import { ArtistsEffects } from './store/artists.effects';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { LoaderComponent } from './ui/loader/loader.component';
+import { ArtistsComponent } from './artists/artists.component';
+import { ArtistItemComponent } from './artists/artist-item/artist-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    LoaderComponent
+    LoaderComponent,
+    ArtistsComponent,
+    ArtistItemComponent
   ],
   imports: [
     BrowserModule,
