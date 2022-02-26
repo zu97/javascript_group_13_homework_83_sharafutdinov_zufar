@@ -13,8 +13,10 @@
       </div>
       <div class="col-md">
         <div class="card-body">
-          <h5 class="card-title">{{ $artist.name }}</h5>
-          <p class="card-text">{{ $artist.information }}</p>
+          <h5 class="card-title mb-0">{{ $artist.name }}</h5>
+          <p class="card-text mt-3"
+             *ngIf="$artist.information"
+          >{{ $artist.information }}</p>
         </div>
       </div>
     </div>

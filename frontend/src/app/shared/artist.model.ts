@@ -3,7 +3,7 @@ export class Artist {
     public id: string,
     public name: string,
     public image: string,
-    public information: string
+    public information: null | string
   ) {}
 }
 
@@ -11,5 +11,5 @@ export interface ApiArtistData {
   _id: string,
   name: string,
   image: string,
-  information: string
+  information: null | string
 }
