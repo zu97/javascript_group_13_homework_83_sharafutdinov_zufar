@@ -1,0 +1,9 @@
+<div class="text-center" *ngIf="spinnerIsLoading; else content">
+  <div [ngClass]="getStyle()" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
+
