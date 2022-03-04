@@ -3,6 +3,7 @@ const config = require('./config');
 
 const Artist = require('./models/Artist');
 const Album = require('./models/Album');
+const Track = require('./models/Track');
 
 const run = async () => {
     await mongoose.connect(config.mongoConfig.url, config.mongoConfig.options);
@@ -26,7 +27,7 @@ const run = async () => {
         information: 'Alizée Jacotey (born 21 August 1984), known professionally as Alizée, is a French singer, dancer and musician. She was born and raised in Ajaccio, Corsica.'
     });
 
-    await Album.create({
+    const [thriller, christmas, nightflight, gourmandises, tout] = await Album.create({
         artist: michaelJackson,
         name: 'Thriller',
         image: 'thriller.jpg',
@@ -52,6 +53,72 @@ const run = async () => {
         image: 'tout.jpg',
         year: 2007
     });
+
+    await Track.create({
+        name: 'Wanna Be Startin’ Somethin’',
+        album: thriller,
+        duration: '6:03'
+    }, {
+        name: 'The Girl Is Mine',
+        album: thriller,
+        duration: '3:42'
+    }, {
+        name: 'Baby Be Mine',
+        album: thriller,
+        duration: '4:20'
+    }, {
+        name: 'Little Drummer Boy',
+        album: christmas,
+        duration: '4:27'
+    }, {
+        name: 'White Christmas',
+        album: christmas,
+        duration: '4:19'
+    }, {
+        name: 'Feliz Navidad',
+        album: christmas,
+        duration: '3:09'
+    }, {
+        name: 'Jingle Bells',
+        album: christmas,
+        duration: '2:55'
+    }, {
+        name: 'Nightflight to Venus',
+        album: nightflight,
+        duration: '4:46'
+    }, {
+        name: 'Rasputin',
+        album: nightflight,
+        duration: '5:51'
+    }, {
+        name: 'Moi... Lolita',
+        album: gourmandises,
+        duration: '4:26'
+    }, {
+        name: 'Lui ou toi',
+        album: gourmandises,
+        duration: '4:18'
+    }, {
+        name: 'Mon maquis',
+        album: gourmandises,
+        duration: '5:45'
+    }, {
+        name: 'Gourmandises',
+        album: tout,
+        duration: '4:15'
+    }, {
+        name: 'J.B.G.',
+        album: tout,
+        duration: '4:00'
+    }, {
+        name: 'Parler tout bas',
+        album: tout,
+        duration: '4:43'
+    }, {
+        name: 'J\'en ai marre !',
+        album: tout,
+        duration: '5:12'
+    })
 
     await mongoose.connection.close();
 };
