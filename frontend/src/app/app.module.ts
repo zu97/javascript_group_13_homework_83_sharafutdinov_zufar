@@ -27,6 +27,7 @@ import { ArtistItemComponent } from './artists/artist-item/artist-item.component
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
 import { LayoutComponent } from './ui/layout/layout.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
+import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FileInputComponent } from './ui/file-input/file-input.component';
     ArtistItemComponent,
     ArtistDetailsComponent,
     LayoutComponent,
-    FileInputComponent
+    FileInputComponent,
+    ValidateIdenticalDirective
   ],
   imports: [
     BrowserModule,
