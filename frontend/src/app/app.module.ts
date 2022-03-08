@@ -13,6 +13,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { artistsReducer } from './store/artists.reducer';
 import { ArtistsEffects } from './store/artists.effects';
@@ -30,6 +33,7 @@ import { ArtistDetailsComponent } from './artists/artist-details/artist-details.
 import { LayoutComponent } from './ui/layout/layout.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,8 @@ import { ValidateIdenticalDirective } from './directives/validate-identical.dire
     ArtistDetailsComponent,
     LayoutComponent,
     FileInputComponent,
-    ValidateIdenticalDirective
+    ValidateIdenticalDirective,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,10 @@ import { ValidateIdenticalDirective } from './directives/validate-identical.dire
     MatToolbarModule,
     MatButtonModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
