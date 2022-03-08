@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 import { artistsReducer } from './store/artists.reducer';
 import { ArtistsEffects } from './store/artists.effects';
@@ -51,7 +52,8 @@ import { FileInputComponent } from './ui/file-input/file-input.component';
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

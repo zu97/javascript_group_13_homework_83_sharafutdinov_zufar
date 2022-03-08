@@ -1,9 +1,9 @@
-<div class="alert alert-danger" *ngIf="error | async">
+<mat-card class="error" *ngIf="error | async">
   {{ error | async }}
-</div>
+</mat-card>
 
-<app-loader [isLoading]="isLoading | async">
-  <div class="row row-cols-md-4">
+<app-loader [isLoading]="isLoading | async" size="lg">
+  <div fxLayout="row" fxLayoutGap="16px">
     <app-artist-item
       *ngFor="let artist of artists | async"
       [artist]="artist"

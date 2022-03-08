@@ -1,39 +1,39 @@
-<div class="alert alert-danger" *ngIf="error | async">
+<mat-card class="error" *ngIf="error | async">
   {{ error | async }}
-</div>
+</mat-card>
 
-<app-loader [isLoading]="isLoading | async">
-  <div class="card mb-3" *ngIf="artist | async as $artist">
-    <div class="row no-gutters">
-      <div class="col-md-auto">
-        <img class="card-img-top artist-img"
+<app-loader [isLoading]="isLoading | async" size="lg">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <mat-card fxLayout="row" *ngIf="artist | async as $artist">
+      <div>
+        <img mat-card-image
              [src]="apiUrl + '/uploads/' + $artist.image"
              [alt]="$artist.name"
+             class="artist-img"
         />
       </div>
-      <div class="col-md">
-        <div class="card-body">
-          <h5 class="card-title mb-0">{{ $artist.name }}</h5>
-          <p class="card-text mt-3"
-             *ngIf="$artist.information"
-          >{{ $artist.information }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+      <mat-card-content>
+        <mat-card-title>{{ $artist.name }}</mat-card-title>
+        <p class="card-text mt-3"
+           *ngIf="$artist.information"
+        >{{ $artist.information }}</p>
+      </mat-card-content>
+    </mat-card>
 
-  <div class="p-3 mb-3 border rounded text-center">
-    <strong>Albums</strong>
-  </div>
+    <mat-card>
+      <mat-card-title>Albums</mat-card-title>
+    </mat-card>
 
-  <div class="row row-cols-md-4">
-    <div class="col mb-3" *ngFor="let album of albums | async">
-      <div class="card">
-        <img class="card-img-top" [src]="apiUrl + '/uploads/' + album.image" [alt]="album.name"/>
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">{{ album.name }} <small>({{ album.year }})</small></h5>
-        </div>
-      </div>
+    <div fxLayout="row" fxLayoutGap="16px">
+      <mat-card class="album-card" *ngFor="let album of albums | async">
+        <img mat-card-image
+             [src]="apiUrl + '/uploads/' + album.image"
+             [alt]="album.name"
+        />
+        <mat-card-content>
+          <mat-card-title>{{ album.name }} <small>({{ album.year }})</small></mat-card-title>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </app-loader>

@@ -8,3 +8,11 @@
 .artist-link:hover {
   opacity: 0.9;
 }
+
+.mat-card {
+  max-width: 300px;
+}
+
+.mat-card-content {
+  text-align: center;
+}
