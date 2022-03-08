@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { nanoid } = require('nanoid');
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
 
 const config = require("../config");
@@ -37,7 +37,11 @@ const UserSchema = new Schema({
                     return true;
                 }
 
-                await fs.unlink(config.uploadPath + '/' + value);
+                const filePath = config.uploadPath + '/' + value;
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
+
                 return false;
             },
             message: 'An avatar with this extension cannot be uploaded'

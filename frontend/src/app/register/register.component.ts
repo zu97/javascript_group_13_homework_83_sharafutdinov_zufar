@@ -30,16 +30,16 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
     this.errorSubscription = this.error.subscribe((error) => {
       const email = error?.errors.email?.message;
       if (email) {
-        this.form.form.get('email')?.setErrors({emailServerError: email});
+        this.form.form.get('email')?.setErrors({serverError: email});
+      } else {
+        this.form.form.get('email')?.setErrors(null);
       }
 
       const avatar = error?.errors.avatar?.message;
       if (avatar) {
-        this.form.form.get('email')?.setErrors({avatarServerError: avatar});
-      }
-
-      if (!email && !avatar) {
-        this.form.form.get('email')?.setErrors({});
+        this.form.form.get('avatar')?.setErrors({serverError: avatar});
+      } else {
+        this.form.form.get('avatar')?.setErrors(null);
       }
     });
   }
@@ -51,6 +51,10 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
 
     const userData = this.form.value;
     delete userData.rePassword;
+
+    if (!userData.avatar) {
+      delete userData.avatar;
+    }
 
     this.store.dispatch(RegisterUserRequest({ userData }));
   }

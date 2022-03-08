@@ -25,11 +25,8 @@
           <mat-error *ngIf="email.touched && email.hasError('email')">
             Email is not correct
           </mat-error>
-          <mat-error *ngIf="email.touched && email.hasError('emailServerError')">
-            {{ email.getError('emailServerError') }}
-          </mat-error>
-          <mat-error *ngIf="email.touched && email.hasError('avatarServerError')">
-            {{ email.getError('avatarServerError') }}
+          <mat-error *ngIf="email.touched && email.hasError('serverError')">
+            {{ email.getError('serverError') }}
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -81,7 +78,14 @@
           <app-file-input name="avatar"
                           accept="image/png, image/gif, image/jpeg"
                           ngModel
+                          #avatar="ngModel"
           ></app-file-input>
+          <mat-error *ngIf="avatar.touched && avatar.hasError('accept')">
+            An avatar with this extension cannot be uploaded
+          </mat-error>
+          <mat-error *ngIf="avatar.touched && avatar.hasError('serverError')">
+            {{ avatar.getError('serverError') }}
+          </mat-error>
         </mat-form-field>
         <button mat-raised-button
                 color="primary"
