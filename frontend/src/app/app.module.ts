@@ -18,6 +18,8 @@ import { artistsReducer } from './store/artists.reducer';
 import { ArtistsEffects } from './store/artists.effects';
 import { albumsReducer } from './store/albums.reducer';
 import { AlbumsEffects } from './store/albums.effects';
+import { usersReducer } from './store/users.reducer';
+import { UsersEffects } from './store/users.effects';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -43,8 +45,12 @@ import { ValidateIdenticalDirective } from './directives/validate-identical.dire
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({artists: artistsReducer, albums: albumsReducer}, {}),
-    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects]),
+    StoreModule.forRoot({
+      artists: artistsReducer,
+      albums: albumsReducer,
+      users: usersReducer
+    }, {}),
+    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects, UsersEffects]),
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

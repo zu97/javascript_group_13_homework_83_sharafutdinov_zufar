@@ -1,5 +1,6 @@
 import { Artist } from '../shared/artist.model';
 import { Album } from '../shared/album.model';
+import { RegisterError, User } from '../shared/user.model';
 
 export type ArtistsState = {
   artists: Artist[],
@@ -14,7 +15,14 @@ export type AlbumsState = {
   fetchError: null | string,
 };
 
+export type UsersState = {
+  user: null | User,
+  registerLoading: boolean,
+  RegisterError: null | RegisterError
+};
+
 export type AppState = {
   artists: ArtistsState,
-  albums: AlbumsState
+  albums: AlbumsState,
+  users: UsersState
 };
