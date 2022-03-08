@@ -7,6 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 import { artistsReducer } from './store/artists.reducer';
 import { ArtistsEffects } from './store/artists.effects';
@@ -19,6 +24,8 @@ import { LoaderComponent } from './ui/loader/loader.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistItemComponent } from './artists/artist-item/artist-item.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
+import { LayoutComponent } from './ui/layout/layout.component';
+import { FileInputComponent } from './ui/file-input/file-input.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,9 @@ import { ArtistDetailsComponent } from './artists/artist-details/artist-details.
     LoaderComponent,
     ArtistsComponent,
     ArtistItemComponent,
-    ArtistDetailsComponent
+    ArtistDetailsComponent,
+    LayoutComponent,
+    FileInputComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,12 @@ import { ArtistDetailsComponent } from './artists/artist-details/artist-details.
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    LayoutModule
+    LayoutModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
