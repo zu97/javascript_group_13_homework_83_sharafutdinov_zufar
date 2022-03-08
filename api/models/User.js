@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { nanoid } = require('nanoid');
+const fs = require('fs').promises;
+const path = require('path');
 
+const config = require("../config");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -9,8 +12,38 @@ const UserSchema = new Schema({
         type: String,
         unique: true,
         required: true,
+        validate: {
+            validator: async value => {
+                const checkUser = await User.findOne({email: value});
+                if (checkUser) return false;
+            },
+            message: 'User with this email is already registered'
+        }
     },
     password: {
+        type: String,
+        required: true,
+    },
+    avatar: {
+        type: String,
+        validate: {
+            validator: async value => {
+                if (!value) {
+                    return true;
+                }
+
+                const extName = path.extname(value);
+                if (config.avatarAllowedTypes.length === 0 || config.avatarAllowedTypes.includes(extName)) {
+                    return true;
+                }
+
+                await fs.unlink(config.uploadPath + '/' + value);
+                return false;
+            },
+            message: 'An avatar with this extension cannot be uploaded'
+        }
+    },
+    displayName: {
         type: String,
         required: true,
     },
