@@ -29,6 +29,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AlbumItemComponent } from './pages/albums/album-item/album-item.component';
+import { TracksComponent } from './pages/tracks/tracks.component';
+import { TrackItemComponent } from './pages/tracks/track-item/track-item.component';
 
 @NgModule({
   declarations: [
@@ -44,16 +46,12 @@ import { AlbumItemComponent } from './pages/albums/album-item/album-item.compone
     RegisterComponent,
     CenteredCardComponent,
     LoginComponent,
-    AlbumItemComponent
+    AlbumItemComponent,
+    TracksComponent,
+    TrackItemComponent
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({
-      artists: artistsReducer,
-      albums: albumsReducer,
-      users: usersReducer
-    }, {}),
-    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects, UsersEffects]),
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

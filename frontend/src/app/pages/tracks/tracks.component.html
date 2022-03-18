@@ -1,0 +1,5 @@
+<app-loader [isLoading]="isLoading | async" size="lg">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <app-track-item *ngFor="let track of tracks | async" [track]="track"></app-track-item>
+  </div>
+</app-loader>

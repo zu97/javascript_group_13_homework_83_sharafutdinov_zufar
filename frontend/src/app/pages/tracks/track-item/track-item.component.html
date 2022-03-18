@@ -1,0 +1,18 @@
+<mat-card fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-card-title>{{ track.name }}</mat-card-title>
+    <mat-card-subtitle>{{ track.duration }}</mat-card-subtitle>
+  </div>
+  <mat-card-content fxLayout="row" fxLayoutGap="5px">
+<!--    <button mat-stroked-button-->
+<!--            color="primary"-->
+<!--            *ngIf="track.youtube"-->
+<!--    >Play YouTube</button>-->
+    <button mat-flat-button color="primary"
+            (click)="onListen(track._id)"
+            [disabled]="isLoading"
+    >
+      <app-loader [isLoading]="isLoading" size="sm">Listen</app-loader>
+    </button>
+  </mat-card-content>
+</mat-card>
