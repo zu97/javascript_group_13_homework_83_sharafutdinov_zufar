@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const Artist = require('../models/Artist');
 const Album = require('../models/Album');
 const Track = require('../models/Track');
+const auth = require("../middleware/auth");
+const permit = require("../middleware/permit");
 
 const router = express.Router();
 
@@ -49,7 +51,7 @@ router.get('/byAlbum/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', auth, permit('admin'), async (req, res, next) => {
     try {
         const name = req.body.name;
         const album = req.body.album;
