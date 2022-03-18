@@ -1,0 +1,15 @@
+.album-card {
+  max-width: 300px;
+  text-align: center;
+}
+
+.album-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity .3s;
+}
+
+.album-link:hover {
+  opacity: 0.9;
+}

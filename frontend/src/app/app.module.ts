@@ -29,13 +29,14 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { LoaderComponent } from './ui/loader/loader.component';
 import { ArtistsComponent } from './pages/artists/artists.component';
 import { ArtistItemComponent } from './pages/artists/artist-item/artist-item.component';
-import { ArtistDetailsComponent } from './pages/artists/artist-details/artist-details.component';
+import { AlbumsComponent } from './pages/albums/albums.component';
 import { LayoutComponent } from './ui/layout/layout.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 import { RegisterComponent } from './pages/register/register.component';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AlbumItemComponent } from './pages/albums/album-item/album-item.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +45,14 @@ import { LoginComponent } from './pages/login/login.component';
     LoaderComponent,
     ArtistsComponent,
     ArtistItemComponent,
-    ArtistDetailsComponent,
+    AlbumsComponent,
     LayoutComponent,
     FileInputComponent,
     ValidateIdenticalDirective,
     RegisterComponent,
     CenteredCardComponent,
-    LoginComponent
+    LoginComponent,
+    AlbumItemComponent
   ],
   imports: [
     BrowserModule,

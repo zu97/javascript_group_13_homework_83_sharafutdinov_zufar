@@ -25,15 +25,7 @@
     </mat-card>
 
     <div fxLayout="row" fxLayoutGap="16px">
-      <mat-card class="album-card" *ngFor="let album of albums | async">
-        <img mat-card-image
-             [src]="apiUrl + '/uploads/' + album.image"
-             [alt]="album.name"
-        />
-        <mat-card-content>
-          <mat-card-title>{{ album.name }} <small>({{ album.year }})</small></mat-card-title>
-        </mat-card-content>
-      </mat-card>
+      <app-album-item *ngFor="let album of albums | async" [album]="album"></app-album-item>
     </div>
   </div>
 </app-loader>

@@ -1,0 +1,11 @@
+<a [routerLink]="'./' + album.id" class="album-link">
+  <mat-card class="album-card">
+    <img mat-card-image
+         [src]="apiUrl + '/uploads/' + album.image"
+         [alt]="album.name"
+    />
+    <mat-card-content>
+      <mat-card-title>{{ album.name }} <small>({{ album.year }})</small></mat-card-title>
+    </mat-card-content>
+  </mat-card>
+</a>
