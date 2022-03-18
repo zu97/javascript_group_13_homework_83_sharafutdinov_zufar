@@ -4,6 +4,8 @@ const config = require('./config');
 const Artist = require('./models/Artist');
 const Album = require('./models/Album');
 const Track = require('./models/Track');
+const User = require('./models/User');
+const {nanoid} = require("nanoid");
 
 const run = async () => {
     await mongoose.connect(config.mongoConfig.url, config.mongoConfig.options);
@@ -57,7 +59,7 @@ const run = async () => {
     await Track.create({
         name: 'Wanna Be Startin’ Somethin’',
         album: thriller,
-        duration: '6:03'
+        duration: '6:03',
     }, {
         name: 'The Girl Is Mine',
         album: thriller,
@@ -66,6 +68,14 @@ const run = async () => {
         name: 'Baby Be Mine',
         album: thriller,
         duration: '4:20'
+    }, {
+        name: 'Billie Jean',
+        album: thriller,
+        duration: '4:54'
+    }, {
+        name: 'Human Nature',
+        album: thriller,
+        duration: '4:06'
     }, {
         name: 'Little Drummer Boy',
         album: christmas,
@@ -83,13 +93,40 @@ const run = async () => {
         album: christmas,
         duration: '2:55'
     }, {
+        name: 'Winter Fairy Tale',
+        album: christmas,
+        duration: '2:59'
+    }, {
+        name: 'Mary\'s Boy Child/Oh My Lord',
+        album: christmas,
+        duration: '5:10',
+        youtube: 'https://www.youtube.com/embed/cmm1gt_2SkQ'
+    }, {
         name: 'Nightflight to Venus',
         album: nightflight,
         duration: '4:46'
     }, {
         name: 'Rasputin',
         album: nightflight,
-        duration: '5:51'
+        duration: '5:51',
+        youtube: 'https://www.youtube.com/embed/16y1AkoZkmQ'
+    }, {
+        name: 'Painter Man',
+        album: nightflight,
+        duration: '3:16',
+        youtube: 'https://www.youtube.com/embed/STVrEsscBss'
+    }, {
+        name: 'He Was a Steppenwolf',
+        album: nightflight,
+        duration: '6:52'
+    }, {
+        name: 'King of the Road',
+        album: nightflight,
+        duration: '2:36'
+    }, {
+        name: 'Rivers of Babylon',
+        album: nightflight,
+        duration: '4:17'
     }, {
         name: 'Moi... Lolita',
         album: gourmandises,
@@ -97,11 +134,21 @@ const run = async () => {
     }, {
         name: 'Lui ou toi',
         album: gourmandises,
-        duration: '4:18'
+        duration: '4:18',
+        youtube: 'https://www.youtube.com/embed/e1JmO9i4ylg'
     }, {
         name: 'Mon maquis',
         album: gourmandises,
-        duration: '5:45'
+        duration: '5:45',
+    }, {
+        name: 'Parler tout bas',
+        album: gourmandises,
+        duration: '4:43',
+        youtube: 'https://www.youtube.com/embed/QouhRxPE_Po'
+    }, {
+        name: 'Veni Vedi Vici',
+        album: gourmandises,
+        duration: '4:22'
     }, {
         name: 'Gourmandises',
         album: tout,
@@ -118,7 +165,30 @@ const run = async () => {
         name: 'J\'en ai marre !',
         album: tout,
         duration: '5:12'
-    })
+    }, {
+        name: 'Youpidou',
+        album: tout,
+        duration: '4:05',
+        youtube: 'https://www.youtube.com/embed/kb_eyNgT8as'
+    }, {
+        name: 'Hey ! Amigo !',
+        album: tout,
+        duration: '3:55'
+    });
+
+    await User.create({
+        email: 'anna@gmail.com',
+        password: '123',
+        displayName: 'Anna',
+        role: 'user',
+        token: nanoid()
+    }, {
+        email: 'john@gmail.com',
+        password: '123',
+        displayName: 'John',
+        role: 'admin',
+        token: nanoid()
+    });
 
     await mongoose.connection.close();
 };
