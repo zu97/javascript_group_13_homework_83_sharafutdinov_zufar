@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { RegisterError } from '../../models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
-import { RegisterUserRequest } from '../../store/users.actions';
+import { registerUserRequest } from '../../store/users.actions';
 
 @Component({
   selector: 'app-register',
@@ -56,7 +56,7 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
       delete userData.avatar;
     }
 
-    this.store.dispatch(RegisterUserRequest({ userData }));
+    this.store.dispatch(registerUserRequest({ userData }));
   }
 
   ngOnDestroy(): void {

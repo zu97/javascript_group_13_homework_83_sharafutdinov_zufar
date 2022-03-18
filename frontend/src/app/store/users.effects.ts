@@ -7,9 +7,9 @@ import {
   loginUserSuccess,
   logoutUser,
   logoutUserRequest,
-  RegisterUserFailure,
-  RegisterUserRequest,
-  RegisterUserSuccess
+  registerUserFailure,
+  registerUserRequest,
+  registerUserSuccess
 } from './users.actions';
 import { map, mergeMap, NEVER, tap, withLatestFrom } from 'rxjs';
 import { Router } from '@angular/router';
@@ -31,14 +31,14 @@ export class UsersEffects {
   ) {}
 
   registerUser = createEffect(() => this.actions.pipe(
-    ofType(RegisterUserRequest),
+    ofType(registerUserRequest),
     mergeMap(({userData}) => this.usersService.registerUser(userData).pipe(
-      map((user) => RegisterUserSuccess({user})),
+      map((user) => registerUserSuccess({user})),
       tap(() => {
         this.snackBar.open('User is registered');
         void this.router.navigate(['/']);
       }),
-      this.helpersService.catchServerError(RegisterUserFailure)
+      this.helpersService.catchServerError(registerUserFailure)
     )),
   ));
 
