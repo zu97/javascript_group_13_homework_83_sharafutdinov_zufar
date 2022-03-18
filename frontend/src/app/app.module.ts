@@ -34,6 +34,7 @@ import { LayoutComponent } from './ui/layout/layout.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 import { RegisterComponent } from './register/register.component';
+import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RegisterComponent } from './register/register.component';
     LayoutComponent,
     FileInputComponent,
     ValidateIdenticalDirective,
-    RegisterComponent
+    RegisterComponent,
+    CenteredCardComponent
   ],
   imports: [
     BrowserModule,
