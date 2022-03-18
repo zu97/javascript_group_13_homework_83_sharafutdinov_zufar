@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,13 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-import { artistsReducer } from './store/artists.reducer';
-import { ArtistsEffects } from './store/artists.effects';
-import { albumsReducer } from './store/albums.reducer';
-import { AlbumsEffects } from './store/albums.effects';
-import { usersReducer } from './store/users.reducer';
-import { UsersEffects } from './store/users.effects';
+import { AppStoreModule } from './app-store.module';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -75,7 +67,8 @@ import { AlbumItemComponent } from './pages/albums/album-item/album-item.compone
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AppStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
