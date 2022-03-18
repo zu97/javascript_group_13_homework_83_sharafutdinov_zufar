@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-module.exports = async (req, res, next) => {
+const auth = async (req, res, next) => {
     const token = req.get('Authorization');
     if (!token) {
         return res.status(401).send({message: 'Missing authorization token'});
@@ -14,3 +14,5 @@ module.exports = async (req, res, next) => {
     req.user = user;
     next();
 };
+
+module.exports = auth;
