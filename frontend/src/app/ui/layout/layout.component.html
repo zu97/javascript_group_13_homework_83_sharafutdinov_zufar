@@ -2,10 +2,21 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
       <a routerLink="/">Artists</a>
-      <a routerLink="/register" mat-button>Register</a>
+      <nav *ngIf="!(user | async); else userNav">
+        <a routerLink="/register" mat-button>Register</a>
+        <a routerLink="/login" mat-button>Login</a>
+      </nav>
     </mat-toolbar>
     <div class="content">
       <ng-content></ng-content>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
+<ng-template #userNav>
+  <span class="hello-user">Hello, <strong>{{ (user | async)?.displayName }}</strong>!</span>
+  <nav>
+    <button type="button" mat-button (click)="logout()">Logout</button>
+  </nav>
+</ng-template>

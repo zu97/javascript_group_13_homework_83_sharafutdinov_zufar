@@ -35,6 +35,7 @@ import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 import { RegisterComponent } from './pages/register/register.component';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CenteredCardComponent } from './ui/centered-card/centered-card.componen
     FileInputComponent,
     ValidateIdenticalDirective,
     RegisterComponent,
-    CenteredCardComponent
+    CenteredCardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

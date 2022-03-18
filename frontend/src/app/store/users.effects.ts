@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UsersService } from '../services/users.service';
-import { RegisterUserFailure, RegisterUserRequest, RegisterUserSuccess } from './users.actions';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import {
+  loginUserFailure,
+  loginUserRequest,
+  loginUserSuccess,
+  logoutUser,
+  logoutUserRequest,
+  RegisterUserFailure,
+  RegisterUserRequest,
+  RegisterUserSuccess
+} from './users.actions';
+import { map, mergeMap, NEVER, tap, withLatestFrom } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { AppState } from './types';
+import { HelpersServices } from '../services/helpers.services';
 
 @Injectable()
 export class UsersEffects {
@@ -15,6 +26,8 @@ export class UsersEffects {
     private router: Router,
     private snackBar: MatSnackBar,
     private usersService: UsersService,
+    private helpersService: HelpersServices,
+    private store: Store<AppState>,
   ) {}
 
   registerUser = createEffect(() => this.actions.pipe(
@@ -22,21 +35,38 @@ export class UsersEffects {
     mergeMap(({userData}) => this.usersService.registerUser(userData).pipe(
       map((user) => RegisterUserSuccess({user})),
       tap(() => {
-        this.snackBar.open('User is registered', 'OK', {duration: 3000});
+        this.snackBar.open('User is registered');
         void this.router.navigate(['/']);
       }),
-      catchError((error) => {
-        let serverError = null;
-
-        if (error instanceof HttpErrorResponse && error.status === 400) {
-          serverError = error.error;
-        } else {
-          this.snackBar.open('Server error', 'OK', {duration: 3000});
-        }
-
-        return of(RegisterUserFailure({error: serverError}));
-      }),
+      this.helpersService.catchServerError(RegisterUserFailure)
     )),
   ));
+
+  loginUser = createEffect(() => this.actions.pipe(
+    ofType(loginUserRequest),
+    mergeMap(({userData}) => this.usersService.loginUser(userData).pipe(
+      map((user) => loginUserSuccess({user})),
+      tap(() => {
+        this.helpersService.openSnackBar('Login successful');
+        void this.router.navigate(['/'])
+      }),
+      this.helpersService.catchServerError(loginUserFailure),
+    )),
+  ));
+
+  logoutUser = createEffect(() => this.actions.pipe(
+    ofType(logoutUserRequest),
+    withLatestFrom(this.store.select(state => state.users.user)),
+    mergeMap(([_, user]) => {
+      if (user) {
+        return this.usersService.logoutUser(user.token).pipe(
+          map(() => logoutUser()),
+          tap(() => this.helpersService.openSnackBar('Logout successful')),
+        );
+      }
+
+      return NEVER;
+    })
+  ))
 
 }
