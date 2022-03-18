@@ -17,6 +17,7 @@
 <ng-template #userNav>
   <span class="hello-user">Hello, <strong>{{ (user | async)?.displayName }}</strong>!</span>
   <nav>
+    <a routerLink="/history" mat-button>Track History</a>
     <button type="button" mat-button (click)="logout()">Logout</button>
   </nav>
 </ng-template>

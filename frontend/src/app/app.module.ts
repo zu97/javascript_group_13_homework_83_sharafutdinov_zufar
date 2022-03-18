@@ -31,6 +31,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { AlbumItemComponent } from './pages/albums/album-item/album-item.component';
 import { TracksComponent } from './pages/tracks/tracks.component';
 import { TrackItemComponent } from './pages/tracks/track-item/track-item.component';
+import { TracksHistoryComponent } from './pages/tracks-history/tracks-history.component';
+import { TrackHistoryItemComponent } from './pages/tracks-history/track-item/track-history-item.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { TrackItemComponent } from './pages/tracks/track-item/track-item.compone
     LoginComponent,
     AlbumItemComponent,
     TracksComponent,
-    TrackItemComponent
+    TrackItemComponent,
+    TracksHistoryComponent,
+    TrackHistoryItemComponent
   ],
   imports: [
     BrowserModule,
