@@ -4,11 +4,13 @@ export interface User {
   avatar?: undefined | string;
   displayName: string;
   token: string;
+  role: string;
 }
 
 export interface RegisterUserData {
   [key: string]: any;
   email: string;
+  password: string;
   avatar?: undefined | string;
   displayName: string;
 }
