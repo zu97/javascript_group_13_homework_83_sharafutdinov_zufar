@@ -4,6 +4,8 @@ import { addHistoryTrackRequest } from '../../../store/tracks.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/types';
 import { Observable, Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { YoutubeModalComponent } from '../../../ui/youtube-modal/youtube-modal.component';
 
 @Component({
   selector: 'app-track-item',
@@ -19,6 +21,7 @@ export class TrackItemComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
+    private dialog: MatDialog,
   ) {
     this.loading = store.select(state => state.tracks.addHistoryLoading);
   }
@@ -34,8 +37,17 @@ export class TrackItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  onListen(id: string): void {
-    this.store.dispatch(addHistoryTrackRequest({id}));
+  onListen(): void {
+    this.store.dispatch(addHistoryTrackRequest({id: this.track._id}));
+  }
+
+  onOpenYoutube(): void {
+    this.onListen();
+    this.dialog.open(YoutubeModalComponent, {
+      data: {
+        youtubeLink: this.track.youtube
+      },
+    });
   }
 
   ngOnDestroy(): void {

@@ -33,6 +33,8 @@ import { TracksComponent } from './pages/tracks/tracks.component';
 import { TrackItemComponent } from './pages/tracks/track-item/track-item.component';
 import { TracksHistoryComponent } from './pages/tracks-history/tracks-history.component';
 import { TrackHistoryItemComponent } from './pages/tracks-history/track-item/track-history-item.component';
+import { YoutubeModalComponent } from './ui/youtube-modal/youtube-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { TrackHistoryItemComponent } from './pages/tracks-history/track-item/tra
     TracksComponent,
     TrackItemComponent,
     TracksHistoryComponent,
-    TrackHistoryItemComponent
+    TrackHistoryItemComponent,
+    YoutubeModalComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { TrackHistoryItemComponent } from './pages/tracks-history/track-item/tra
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    AppStoreModule
+    AppStoreModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
