@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
-import { ArtistsComponent } from './artists/artists.component';
-import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
-import { RegisterComponent } from './register/register.component';
+import { ArtistsComponent } from './pages/artists/artists.component';
+import { ArtistDetailsComponent } from './pages/artists/artist-details/artist-details.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   {path: '', component: ArtistsComponent},

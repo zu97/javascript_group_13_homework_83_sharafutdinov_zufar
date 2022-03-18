@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UsersService } from '../shared/users.service';
+import { UsersService } from '../services/users.service';
 import { RegisterUserFailure, RegisterUserRequest, RegisterUserSuccess } from './users.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Router } from '@angular/router';

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Artist } from '../../shared/artist.model';
-import { Album } from '../../shared/album.model';
+import { Artist } from '../../../models/artist.model';
+import { Album } from '../../../models/album.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/types';
-import { fetchAlbumsRequest } from '../../store/albums.actions';
+import { AppState } from '../../../store/types';
+import { fetchAlbumsRequest } from '../../../store/albums.actions';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-artist-details',

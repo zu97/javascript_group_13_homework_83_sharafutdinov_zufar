@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs';
-import { Album, ApiAlbumData } from './album.model';
-import { ApiArtistData, Artist } from './artist.model';
+import { Album, ApiAlbumData } from '../models/album.model';
+import { ApiArtistData, Artist } from '../models/artist.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { RegisterError } from '../shared/user.model';
+import { RegisterError } from '../../models/user.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/types';
-import { RegisterUserRequest } from '../store/users.actions';
+import { AppState } from '../../store/types';
+import { RegisterUserRequest } from '../../store/users.actions';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +23,7 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
     private store: Store<AppState>,
   ) {
     this.isLoading = store.select(state => state.users.registerLoading);
-    this.error = store.select(state => state.users.RegisterError);
+    this.error = store.select(state => state.users.registerError);
   }
 
   ngAfterViewInit(): void {

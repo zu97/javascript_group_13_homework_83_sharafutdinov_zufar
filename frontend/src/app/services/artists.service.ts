@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiArtistData, Artist } from './artist.model';
+import { ApiArtistData, Artist } from '../models/artist.model';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs';
 

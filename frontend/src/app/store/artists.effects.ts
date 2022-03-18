@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetchArtistsFailure, fetchArtistsRequest, fetchArtistsSuccess } from './artists.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { ArtistsService } from '../shared/artists.service';
+import { ArtistsService } from '../services/artists.service';
 
 @Injectable()
 export class ArtistsEffects {

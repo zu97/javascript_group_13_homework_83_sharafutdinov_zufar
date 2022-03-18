@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Artist } from '../../shared/artist.model';
-import { environment } from '../../../environments/environment';
+import { Artist } from '../../../models/artist.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-artist-item',

@@ -13,15 +13,15 @@ export interface RegisterUserData {
   displayName: string;
 }
 
-export interface fieldError {
+export interface FieldError {
   message: string;
 }
 
 export interface RegisterError {
   errors: {
-    email?: undefined | fieldError;
-    password?: undefined | fieldError;
-    avatar?: undefined | fieldError;
-    displayName?: undefined | fieldError;
+    email?: undefined | FieldError;
+    password?: undefined | FieldError;
+    avatar?: undefined | FieldError;
+    displayName?: undefined | FieldError;
   }
 }

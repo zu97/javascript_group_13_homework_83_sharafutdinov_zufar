@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AlbumsService } from '../shared/albums.service';
+import { AlbumsService } from '../services/albums.service';
 import { fetchAlbumsFailed, fetchAlbumsRequest, fetchAlbumsSuccess } from './albums.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
 

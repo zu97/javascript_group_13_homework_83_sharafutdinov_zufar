@@ -27,13 +27,13 @@ import { UsersEffects } from './store/users.effects';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { LoaderComponent } from './ui/loader/loader.component';
-import { ArtistsComponent } from './artists/artists.component';
-import { ArtistItemComponent } from './artists/artist-item/artist-item.component';
-import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
+import { ArtistsComponent } from './pages/artists/artists.component';
+import { ArtistItemComponent } from './pages/artists/artist-item/artist-item.component';
+import { ArtistDetailsComponent } from './pages/artists/artist-details/artist-details.component';
 import { LayoutComponent } from './ui/layout/layout.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 
 @NgModule({

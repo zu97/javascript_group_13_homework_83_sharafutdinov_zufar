@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/types';
+import { AppState } from '../../store/types';
 import { Observable } from 'rxjs';
-import { Artist } from '../shared/artist.model';
-import { fetchArtistsRequest } from '../store/artists.actions';
+import { Artist } from '../../models/artist.model';
+import { fetchArtistsRequest } from '../../store/artists.actions';
 
 @Component({
   selector: 'app-artists',
