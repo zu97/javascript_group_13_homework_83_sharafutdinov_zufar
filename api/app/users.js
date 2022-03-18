@@ -60,10 +60,10 @@ router.post('/sessions', async (req, res, next) => {
             return res.status(400).send({message: 'Invalid email or password'});
         }
 
-        const token = user.generateToken();
+        user.generateToken();
         await user.save();
 
-        res.send({ token });
+        res.send(user);
     } catch (e) {
         if (e instanceof mongoose.Error.ValidationError) {
             return res.status(400).send(e);
@@ -71,6 +71,25 @@ router.post('/sessions', async (req, res, next) => {
 
         next(e);
     }
+});
+
+router.delete('/sessions', async (req, res, next) => {
+   try {
+       const token = reg.get('Authorization');
+       const message = {message: 'ok'};
+
+       if (!token) return res.send(message);
+
+       const user = await User.findOne({token});
+       if (!user) return res.send(message);
+
+       user.generateToken();
+       await user.save();
+
+       res.send(message);
+   } catch(e) {
+       next(e);
+   }
 });
 
 module.exports = router;
