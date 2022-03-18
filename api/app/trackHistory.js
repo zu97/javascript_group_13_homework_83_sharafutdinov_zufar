@@ -5,6 +5,29 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
+router.get('/', auth, async (req, res, next) => {
+    try {
+        const tracks = await TrackHistory
+            .find({user: req.user._id})
+            .populate({
+                path: 'track',
+                select: 'name',
+                populate: {
+                    path: 'album',
+                    select: '_id',
+                    populate: {
+                        path: 'artist',
+                        select: 'name'
+                    }
+                }
+            })
+            .sort({_id: -1});
+        res.send(tracks);
+    } catch (e) {
+        next(e);
+    }
+});
+
 router.post('/', auth, async (req, res, next) => {
     try {
         const track = req.body.track;

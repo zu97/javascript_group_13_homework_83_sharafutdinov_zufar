@@ -34,7 +34,7 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
         const file = req.file;
 
         if (!name || !file) {
-            return res.status(400).send({message: 'The name and image fields are required'});
+            return res.status(400).send({error: 'The name and image fields are required'});
         }
 
         const artistData = {

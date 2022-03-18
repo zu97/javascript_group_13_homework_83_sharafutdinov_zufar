@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
         const albumId = req.query.album;
         const artistId = req.query.artist;
         if (albumId && artistId) {
-            return res.status(400).send({message: 'Can\'t put album id and artist id in the same request'});
+            return res.status(400).send({error: 'Can\'t put album id and artist id in the same request'});
         }
 
         let findParams = {};
@@ -39,7 +39,7 @@ router.get('/byAlbum/:id', async (req, res, next) => {
 
         const album = await Album.findById(id);
         if (!album) {
-            return res.status(400).send({message: 'Page not found!'});
+            return res.status(400).send({error: 'Page not found!'});
         }
 
         const artist = await Artist.findById(album.artist);

@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const album = await Album.findById(req.params.id).populate('artist');
         if (!album) {
-            return res.status(404).send({message: 'Not found'});
+            return res.status(404).send({error: 'Not found'});
         }
 
         res.send(album);
@@ -53,7 +53,7 @@ router.get('/withArtist/:id', async (req, res, next) => {
     try {
         const artist = await Artist.findById(req.params.id);
         if (!artist) {
-            return res.status(404).send({message: 'Not found'});
+            return res.status(404).send({error: 'Not found'});
         }
 
         const albums = await Album.find({ artist });
@@ -72,7 +72,7 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
         const file = req.file;
 
         if (!name || !artist || !year || !file) {
-            return res.status(400).send({message: 'Field name, artist, image, year are required'});
+            return res.status(400).send({error: 'Field name, artist, image, year are required'});
         }
 
         const albumData = {

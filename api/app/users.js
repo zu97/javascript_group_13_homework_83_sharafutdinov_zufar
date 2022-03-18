@@ -52,12 +52,12 @@ router.post('/sessions', async (req, res, next) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).send({message: 'Invalid email or password'});
+            return res.status(400).send({error: 'Invalid email or password'});
         }
 
         const isMatch = await user.checkPassword(password);
         if (!isMatch) {
-            return res.status(400).send({message: 'Invalid email or password'});
+            return res.status(400).send({error: 'Invalid email or password'});
         }
 
         user.generateToken();
@@ -75,7 +75,7 @@ router.post('/sessions', async (req, res, next) => {
 
 router.delete('/sessions', async (req, res, next) => {
    try {
-       const token = reg.get('Authorization');
+       const token = req.get('Authorization');
        const message = {message: 'ok'};
 
        if (!token) return res.send(message);

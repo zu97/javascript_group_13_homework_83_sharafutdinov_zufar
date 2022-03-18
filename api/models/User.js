@@ -13,7 +13,9 @@ const UserSchema = new Schema({
         unique: true,
         required: true,
         validate: {
-            validator: async value => {
+            validator: async function(value) {
+                if (!this.isModified('email')) return true;
+
                 const checkUser = await User.findOne({email: value});
                 if (checkUser) return false;
             },
