@@ -41,6 +41,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
+import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
     YoutubeModalComponent,
     IsAuthDirective,
     HasRoleDirective,
-    EditArtistComponent
+    EditArtistComponent,
+    EditAlbumComponent
   ],
   imports: [
     BrowserModule,
