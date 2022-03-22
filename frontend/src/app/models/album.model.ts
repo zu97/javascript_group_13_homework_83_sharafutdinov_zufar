@@ -1,17 +1,29 @@
-export class Album {
-  constructor(
-    public id: string,
-    public artist: string,
-    public name: string,
-    public image: string,
-    public year: number
-  ) {}
+export interface Album {
+  _id: string;
+  artist: string;
+  name: string;
+  image: string;
+  year: number;
+  isPublished: boolean;
 }
 
-export interface ApiAlbumData {
-  _id: string,
-  artist: string,
-  name: string,
-  image: string,
-  year: number
+export interface AddAlbumData {
+  [key: string]: any;
+  artist: string;
+  name: string;
+  image: string;
+  year: string;
+}
+
+interface FieldError {
+  message: string;
+}
+
+export interface AlbumError {
+  errors: {
+    artist?: undefined | FieldError;
+    name?: undefined | FieldError;
+    image?: undefined | FieldError;
+    year?: undefined | FieldError;
+  }
 }
