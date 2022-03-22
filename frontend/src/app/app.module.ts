@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -37,6 +37,7 @@ import { YoutubeModalComponent } from './ui/youtube-modal/youtube-modal.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { IsAuthDirective } from './directives/is-auth.directive';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,9 @@ import { HasRoleDirective } from './directives/has-role.directive';
     AppStoreModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
