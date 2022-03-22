@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Track } from '../../../models/track.model';
-import { addHistoryTrackRequest } from '../../../store/tracks.actions';
+import { addHistoryTrackRequest, publishTrackRequest, removeTrackRequest } from '../../../store/tracks.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/types';
 import { Observable, Subscription } from 'rxjs';
@@ -48,6 +48,14 @@ export class TrackItemComponent implements OnInit, OnDestroy {
         youtubeLink: this.track.youtube
       },
     });
+  }
+
+  onPublish(): void {
+    this.store.dispatch(publishTrackRequest({id: this.track._id}));
+  }
+
+  onRemove(): void {
+    this.store.dispatch(removeTrackRequest({id: this.track._id}));
   }
 
   ngOnDestroy(): void {

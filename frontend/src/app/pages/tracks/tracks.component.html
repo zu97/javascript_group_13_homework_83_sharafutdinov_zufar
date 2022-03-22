@@ -1,3 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+  <h1>Tracks</h1>
+  <a routerLink="./new"
+     mat-flat-button
+     color="primary"
+     *appIsAuth="true"
+  >New track</a>
+</div>
+
 <app-loader [isLoading]="isLoading | async" size="lg">
   <div fxLayout="column" fxLayoutGap="16px">
     <app-track-item *ngFor="let track of tracks | async" [track]="track"></app-track-item>

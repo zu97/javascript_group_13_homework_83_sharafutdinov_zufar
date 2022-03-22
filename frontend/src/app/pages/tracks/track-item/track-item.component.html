@@ -2,8 +2,13 @@
   <div fxLayout="row" fxLayoutAlign="center">
     <mat-card-title>{{ track.name }}</mat-card-title>
     <mat-card-subtitle>{{ track.duration }}</mat-card-subtitle>
+    <p *ngIf="!track.isPublished" class="not-published">Not published</p>
   </div>
   <mat-card-content fxLayout="row" fxLayoutGap="5px">
+    <button mat-flat-button color="primary"
+            *ngIf="!track.isPublished"
+            (click)="onPublish()"
+    >Publish</button>
     <button mat-stroked-button
             color="primary"
             *ngIf="track.youtube"
@@ -15,5 +20,8 @@
     >
       <app-loader [isLoading]="isLoading" size="sm">Listen</app-loader>
     </button>
+    <button mat-flat-button color="warn"
+            (click)="onRemove()"
+    >Remove</button>
   </mat-card-content>
 </mat-card>

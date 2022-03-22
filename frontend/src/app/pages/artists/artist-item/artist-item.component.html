@@ -1,8 +1,25 @@
-<a [routerLink]="['/artists', artist.id]" class="artist-link">
-  <mat-card>
-    <img mat-card-image [src]="apiUrl + '/uploads/' + artist.image" [alt]="artist.name" />
-    <mat-card-content>
-      <mat-card-title>{{ artist.name }}</mat-card-title>
-    </mat-card-content>
-  </mat-card>
-</a>
+<mat-card>
+  <a [routerLink]="['/albums', artist._id]" class="artist-link">
+    <img mat-card-image [src]="apiUrl + '/uploads/' + artist.image" [alt]="artist.name"/>
+  </a>
+  <mat-card-content>
+    <p *ngIf="!artist.isPublished" class="not-published">Not published</p>
+    <mat-card-title>{{ artist.name }}</mat-card-title>
+  </mat-card-content>
+  <mat-card-content *appHasRole="['admin']">
+    <button type="button"
+            mat-button
+            color="primary"
+            *ngIf="!artist.isPublished"
+            (click)="onPublish()"
+    >Publish
+    </button>
+    <button type="button"
+            mat-button
+            color="warn"
+            (click)="onRemove()"
+    >Remove
+    </button>
+  </mat-card-content>
+</mat-card>
+

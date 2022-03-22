@@ -1,3 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+  <h1>Artists</h1>
+  <a routerLink="/artists/new"
+     mat-flat-button
+     color="primary"
+     *appIsAuth="true"
+  >New artist</a>
+</div>
+
 <mat-card class="error" *ngIf="error | async">
   {{ error | async }}
 </mat-card>
