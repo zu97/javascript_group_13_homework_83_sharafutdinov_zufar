@@ -1,0 +1,83 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+  <h1>New Track</h1>
+</div>
+
+<mat-card>
+  <form (ngSubmit)="onSubmit()" fxLayout="column" #f="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Artist</mat-label>
+      <mat-select name="artist"
+                  ngModel
+                  #artist="ngModel"
+                  required
+                  (valueChange)="onArtistSelected($event)"
+      >
+        <mat-option *ngFor="let artist of (artists | async)" [value]="artist._id">
+          {{ artist.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="artist.touched && artist.hasError('required')">
+        Field is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Album</mat-label>
+      <mat-select name="album"
+                  ngModel
+                  #album="ngModel"
+                  required
+      >
+        <mat-option *ngFor="let album of (albums | async)" [value]="album._id">
+          {{ album.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="album.touched && album.hasError('required')">
+        Field is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="text"
+             name="name"
+             matInput
+             ngModel
+             #name="ngModel"
+             required
+      />
+      <mat-error *ngIf="name.touched && name.hasError('required')">
+        Field is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Duration</mat-label>
+      <input type="text"
+             name="duration"
+             matInput
+             ngModel
+             #duration="ngModel"
+             required
+      />
+      <mat-error *ngIf="duration.touched && duration.hasError('required')">
+        Field is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>YouTube</mat-label>
+      <input type="text"
+             name="youtube"
+             matInput
+             ngModel
+      />
+    </mat-form-field>
+    <button type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="(isLoading | async) || f.invalid"
+    >
+      <app-loader [isLoading]="isLoading | async">
+        Add new
+      </app-loader>
+    </button>
+  </form>
+</mat-card>

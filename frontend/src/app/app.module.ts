@@ -42,6 +42,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
 import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
+import { EditTrackComponent } from './pages/edit-track/edit-track.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
     IsAuthDirective,
     HasRoleDirective,
     EditArtistComponent,
-    EditAlbumComponent
+    EditAlbumComponent,
+    EditTrackComponent
   ],
   imports: [
     BrowserModule,
