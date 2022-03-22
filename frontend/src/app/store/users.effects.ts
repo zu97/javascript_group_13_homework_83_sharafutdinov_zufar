@@ -17,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { AppState } from './types';
 import { HelpersServices } from '../services/helpers.services';
+import { fetchArtistsRequest } from './artists.actions';
 
 @Injectable()
 export class UsersEffects {
@@ -48,7 +49,7 @@ export class UsersEffects {
       map((user) => loginUserSuccess({user})),
       tap(() => {
         this.helpersService.openSnackBar('Login successful');
-        void this.router.navigate(['/'])
+        void this.router.navigate(['/']);
       }),
       this.helpersService.catchServerError(loginUserFailure),
     )),
@@ -61,7 +62,11 @@ export class UsersEffects {
       if (user) {
         return this.usersService.logoutUser(user.token).pipe(
           map(() => logoutUser()),
-          tap(() => this.helpersService.openSnackBar('Logout successful')),
+          tap(() => {
+            void this.router.navigate(['/']);
+            this.store.dispatch(fetchArtistsRequest());
+            this.helpersService.openSnackBar('Logout successful');
+          }),
         );
       }
 

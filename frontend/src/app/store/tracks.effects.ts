@@ -3,16 +3,29 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   addHistoryTrackFailure,
   addHistoryTrackRequest,
-  addHistoryTrackSuccess, fetchHistoryTrackFailure, fetchHistoryTrackRequest, fetchHistoryTrackSuccess,
+  addHistoryTrackSuccess,
+  addTrackFailure,
+  addTrackRequest,
+  addTrackSuccess,
+  fetchHistoryTrackFailure,
+  fetchHistoryTrackRequest,
+  fetchHistoryTrackSuccess,
   fetchTracksFailure,
   fetchTracksRequest,
-  fetchTracksSuccess
+  fetchTracksSuccess,
+  publishTrackFailure,
+  publishTrackRequest,
+  publishTrackSuccess,
+  removeTrackFailure,
+  removeTrackRequest,
+  removeTrackSuccess
 } from './tracks.actions';
-import { catchError, map, mergeMap, NEVER, of, withLatestFrom } from 'rxjs';
+import { catchError, map, mergeMap, NEVER, of, tap, withLatestFrom } from 'rxjs';
 import { TracksService } from '../services/tracks.service';
 import { HelpersServices } from '../services/helpers.services';
 import { Store } from '@ngrx/store';
 import { AppState } from './types';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TracksEffects {
@@ -22,6 +35,7 @@ export class TracksEffects {
     private tracksService: TracksService,
     private helpersService: HelpersServices,
     private store: Store<AppState>,
+    private router: Router,
   ) {
   }
 
@@ -34,6 +48,33 @@ export class TracksEffects {
         return of(fetchTracksFailure);
       }),
     )),
+  ));
+
+  addTrack = createEffect(() => this.actions.pipe(
+    ofType(addTrackRequest),
+    mergeMap(({trackData}) => this.tracksService.addTrack(trackData).pipe(
+      map(() => addTrackSuccess()),
+      tap(() => void this.router.navigate(['/'])),
+      this.helpersService.catchServerError(addTrackFailure),
+    ))
+  ));
+
+  publishTrack = createEffect(() => this.actions.pipe(
+    ofType(publishTrackRequest),
+    mergeMap(({id}) => this.tracksService.publishTrack(id).pipe(
+      map(() => publishTrackSuccess()),
+      tap(() => void this.router.navigate(['/'])),
+      this.helpersService.catchServerError(publishTrackFailure),
+    ))
+  ));
+
+  removeTrack = createEffect(() => this.actions.pipe(
+    ofType(removeTrackRequest),
+    mergeMap(({id}) => this.tracksService.removeTrack(id).pipe(
+      map(() => removeTrackSuccess()),
+      tap(() => void this.router.navigate(['/'])),
+      this.helpersService.catchServerError(removeTrackFailure),
+    ))
   ));
 
   fetchHistoryTracks = createEffect(() => this.actions.pipe(
