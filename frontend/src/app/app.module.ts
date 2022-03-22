@@ -32,9 +32,11 @@ import { AlbumItemComponent } from './pages/albums/album-item/album-item.compone
 import { TracksComponent } from './pages/tracks/tracks.component';
 import { TrackItemComponent } from './pages/tracks/track-item/track-item.component';
 import { TracksHistoryComponent } from './pages/tracks-history/tracks-history.component';
-import { TrackHistoryItemComponent } from './pages/tracks-history/track-item/track-history-item.component';
+import { TrackHistoryItemComponent } from './pages/tracks-history/track-history-item/track-history-item.component';
 import { YoutubeModalComponent } from './ui/youtube-modal/youtube-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { IsAuthDirective } from './directives/is-auth.directive';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     TrackItemComponent,
     TracksHistoryComponent,
     TrackHistoryItemComponent,
-    YoutubeModalComponent
+    YoutubeModalComponent,
+    IsAuthDirective,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,
