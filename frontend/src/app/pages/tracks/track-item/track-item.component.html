@@ -5,10 +5,12 @@
     <p *ngIf="!track.isPublished" class="not-published">Not published</p>
   </div>
   <mat-card-content fxLayout="row" fxLayoutGap="5px">
-    <button mat-flat-button color="primary"
-            *ngIf="!track.isPublished"
-            (click)="onPublish()"
-    >Publish</button>
+    <div *appHasRole="['admin']">
+      <button mat-flat-button color="primary"
+              *ngIf="!track.isPublished"
+              (click)="onPublish()"
+      >Publish</button>
+    </div>
     <button mat-stroked-button
             color="primary"
             *ngIf="track.youtube"
@@ -22,6 +24,7 @@
     </button>
     <button mat-flat-button color="warn"
             (click)="onRemove()"
+            *appHasRole="['admin']"
     >Remove</button>
   </mat-card-content>
 </mat-card>
