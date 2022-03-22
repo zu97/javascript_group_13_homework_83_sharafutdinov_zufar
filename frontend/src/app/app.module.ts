@@ -38,6 +38,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { IsAuthDirective } from './directives/is-auth.directive';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { AuthInterceptor } from './auth.interceptor';
+import { MatSelectModule } from '@angular/material/select';
+import { MatBadgeModule } from '@angular/material/badge';
+import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,8 @@ import { AuthInterceptor } from './auth.interceptor';
     TrackHistoryItemComponent,
     YoutubeModalComponent,
     IsAuthDirective,
-    HasRoleDirective
+    HasRoleDirective,
+    EditArtistComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +83,9 @@ import { AuthInterceptor } from './auth.interceptor';
     MatInputModule,
     MatSnackBarModule,
     AppStoreModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatBadgeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

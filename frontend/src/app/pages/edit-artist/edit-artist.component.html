@@ -1,0 +1,54 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+  <h1>New Artist</h1>
+</div>
+
+<mat-card>
+  <form (ngSubmit)="onSubmit()" fxLayout="column" #f="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="text"
+             name="name"
+             matInput
+             ngModel
+             #name="ngModel"
+             required
+      />
+      <mat-error *ngIf="name.touched && name.hasError('required')">
+        Field is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Information</mat-label>
+      <textarea name="information"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                matInput
+                ngModel
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Image</mat-label>
+      <app-file-input name="image"
+                      accept="image/png, image/gif, image/jpeg"
+                      ngModel
+                      #image="ngModel"
+                      required
+      ></app-file-input>
+      <mat-error *ngIf="image.touched && image.hasError('required')">
+        Field is required
+      </mat-error>
+      <mat-error *ngIf="image.touched && image.hasError('accept')">
+        An avatar with this extension cannot be uploaded
+      </mat-error>
+    </mat-form-field>
+    <button type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="(isLoading | async) || f.invalid"
+    >
+      <app-loader [isLoading]="isLoading | async">
+        Add new
+      </app-loader>
+    </button>
+  </form>
+</mat-card>
