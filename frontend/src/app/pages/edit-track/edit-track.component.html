@@ -26,6 +26,7 @@
                   ngModel
                   #album="ngModel"
                   required
+                  [disabled]="!!(artist.invalid)"
       >
         <mat-option *ngFor="let album of (albums | async)" [value]="album._id">
           {{ album.name }}
