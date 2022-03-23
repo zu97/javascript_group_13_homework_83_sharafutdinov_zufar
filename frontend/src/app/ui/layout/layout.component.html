@@ -13,10 +13,16 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-
 <ng-template #userNav>
   <span class="hello-user">Hello, <strong>{{ (user | async)?.displayName }}</strong>!</span>
   <nav>
+    <button mat-button [matMenuTriggerFor]="menu">Add content</button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/artists/new" mat-menu-item>New artist</a>
+      <a routerLink="/albums/new" mat-menu-item>New album</a>
+      <a routerLink="/tracks/new" mat-menu-item>New track</a>
+    </mat-menu>
+
     <a routerLink="/history" mat-button>Track History</a>
     <button type="button" mat-button (click)="logout()">Logout</button>
   </nav>

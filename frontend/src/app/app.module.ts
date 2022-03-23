@@ -43,6 +43,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
 import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 import { EditTrackComponent } from './pages/edit-track/edit-track.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -70,27 +71,28 @@ import { EditTrackComponent } from './pages/edit-track/edit-track.component';
     EditAlbumComponent,
     EditTrackComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    LayoutModule,
-    MatProgressSpinnerModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatButtonModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSnackBarModule,
-    AppStoreModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatBadgeModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        LayoutModule,
+        MatProgressSpinnerModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatButtonModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSnackBarModule,
+        AppStoreModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatBadgeModule,
+        MatMenuModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],

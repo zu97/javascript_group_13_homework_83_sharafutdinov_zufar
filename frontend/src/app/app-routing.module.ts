@@ -16,10 +16,15 @@ const routes: Routes = [
   {path: '', component: ArtistsComponent},
   {path: 'artists', component: ArtistsComponent},
   {path: 'artists/new', component: EditArtistComponent, canActivate: [AuthGuardService]},
+
+  {path: 'albums/new', component: EditAlbumComponent, canActivate: [AuthGuardService]},
   {path: 'albums/:artist', component: AlbumsComponent},
   {path: 'albums/:artist/new', component: EditAlbumComponent, canActivate: [AuthGuardService]},
+
+  {path: 'tracks/new', component: EditTrackComponent, canActivate: [AuthGuardService]},
   {path: 'tracks/:album', component: TracksComponent},
   {path: 'tracks/:album/new', component: EditTrackComponent, canActivate: [AuthGuardService]},
+
   {path: 'history', component: TracksHistoryComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
