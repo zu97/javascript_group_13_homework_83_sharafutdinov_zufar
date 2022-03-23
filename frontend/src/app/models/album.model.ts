@@ -7,6 +7,18 @@ export interface Album {
   isPublished: boolean;
 }
 
+export interface AlbumWithArtist {
+  _id: string;
+  artist: {
+    _id: string;
+  };
+  name: string;
+  image: string;
+  year: number;
+  isPublished: boolean;
+}
+
+
 export interface AddAlbumData {
   [key: string]: any;
   artist: string;

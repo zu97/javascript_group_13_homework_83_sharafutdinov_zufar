@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env, environment } from '../../environments/environment';
-import { AddAlbumData, Album } from '../models/album.model';
+import { AddAlbumData, Album, AlbumWithArtist } from '../models/album.model';
 import { Artist } from '../models/artist.model';
 
 @Injectable({
@@ -16,6 +16,10 @@ export class AlbumsService {
 
   fetchAlbumsWithArtist(artistId: string) {
     return this.http.get<{artist: Artist, albums: Album[]}>(this.apiUrl + '/albums/withArtist/' + artistId);
+  }
+
+  getAlbum(id: string) {
+    return this.http.get<AlbumWithArtist>(env.apiUrl + '/albums/' + id);
   }
 
   addAlbum(albumData: AddAlbumData) {
