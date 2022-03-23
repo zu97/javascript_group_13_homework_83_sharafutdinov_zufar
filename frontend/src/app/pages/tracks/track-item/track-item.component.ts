@@ -3,7 +3,7 @@ import { Track } from '../../../models/track.model';
 import { addHistoryTrackRequest, publishTrackRequest, removeTrackRequest } from '../../../store/tracks.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/types';
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { YoutubeModalComponent } from '../../../ui/youtube-modal/youtube-modal.component';
 
@@ -16,6 +16,9 @@ export class TrackItemComponent implements OnInit, OnDestroy {
   @Input() track!: Track;
   isLoading = false;
 
+  publishLoading: Observable<boolean>;
+  removeLoading: Observable<boolean>;
+
   private loading: Observable<false | string>;
   private loadingSubscription!: Subscription;
 
@@ -24,6 +27,13 @@ export class TrackItemComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
   ) {
     this.loading = store.select(state => state.tracks.addHistoryLoading);
+
+    this.publishLoading = store.select(state => state.tracks.publishLoading).pipe(
+      map((isLoading) => isLoading === this.track._id),
+    );
+    this.removeLoading = store.select(state => state.tracks.removeLoading).pipe(
+      map((isLoading) => isLoading === this.track._id),
+    );
   }
 
   ngOnInit(): void {
@@ -51,11 +61,11 @@ export class TrackItemComponent implements OnInit, OnDestroy {
   }
 
   onPublish(): void {
-    this.store.dispatch(publishTrackRequest({id: this.track._id}));
+    this.store.dispatch(publishTrackRequest({id: this.track._id, albumId: this.track.album}));
   }
 
   onRemove(): void {
-    this.store.dispatch(removeTrackRequest({id: this.track._id}));
+    this.store.dispatch(removeTrackRequest({id: this.track._id, albumId: this.track.album}));
   }
 
   ngOnDestroy(): void {

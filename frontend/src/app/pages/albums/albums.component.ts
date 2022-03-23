@@ -33,8 +33,8 @@ export class AlbumsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const id = <string>params['artist'];
-      this.store.dispatch(fetchAlbumsRequest({ id }));
+      const artistId = <string>params['artist'];
+      this.store.dispatch(fetchAlbumsRequest({ artistId }));
     });
   }
 

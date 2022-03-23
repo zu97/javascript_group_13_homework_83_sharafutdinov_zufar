@@ -33,8 +33,16 @@
       <mat-card-title>Albums</mat-card-title>
     </mat-card>
 
-    <div fxLayout="row" fxLayoutGap="16px">
+    <div fxLayout="row" fxLayoutGap="16px" *ngIf="(albums | async)?.length; else emptyData">
       <app-album-item *ngFor="let album of albums | async" [album]="album"></app-album-item>
     </div>
+
+    <ng-template #emptyData>
+      <mat-card fxLayout="row" fxLayoutAlign="center">
+        <mat-card-subtitle>
+          No information available
+        </mat-card-subtitle>
+      </mat-card>
+    </ng-template>
   </div>
 </app-loader>

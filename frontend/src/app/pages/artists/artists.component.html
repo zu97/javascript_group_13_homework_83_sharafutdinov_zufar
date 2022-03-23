@@ -12,11 +12,19 @@
 </mat-card>
 
 <app-loader [isLoading]="isLoading | async" size="lg">
-  <div fxLayout="row" fxLayoutGap="16px">
+  <div fxLayout="row" fxLayoutGap="16px" *ngIf="(artists | async)?.length; else emptyData">
     <app-artist-item
       *ngFor="let artist of artists | async"
       [artist]="artist"
       class="col mb-3"
     ></app-artist-item>
   </div>
+
+  <ng-template #emptyData>
+    <mat-card fxLayout="row" fxLayoutAlign="center">
+      <mat-card-subtitle>
+        No information available
+      </mat-card-subtitle>
+    </mat-card>
+  </ng-template>
 </app-loader>

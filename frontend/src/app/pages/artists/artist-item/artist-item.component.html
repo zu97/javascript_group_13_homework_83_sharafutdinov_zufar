@@ -6,19 +6,27 @@
     <p *ngIf="!artist.isPublished" class="not-published">Not published</p>
     <mat-card-title>{{ artist.name }}</mat-card-title>
   </mat-card-content>
-  <mat-card-content *appHasRole="['admin']">
+  <mat-card-content fxLayout="row"
+                    fxLayoutGap="5px"
+                    fxLayoutAlign="center"
+                    *appHasRole="['admin']"
+  >
     <button type="button"
-            mat-button
+            mat-flat-button
             color="primary"
             *ngIf="!artist.isPublished"
             (click)="onPublish()"
-    >Publish
+            [disabled]="publishLoading | async"
+    >
+      <app-loader [isLoading]="publishLoading | async">Publish</app-loader>
     </button>
     <button type="button"
-            mat-button
+            mat-flat-button
             color="warn"
             (click)="onRemove()"
-    >Remove
+            [disabled]="removeLoading | async"
+    >
+      <app-loader [isLoading]="removeLoading | async">Remove</app-loader>
     </button>
   </mat-card-content>
 </mat-card>

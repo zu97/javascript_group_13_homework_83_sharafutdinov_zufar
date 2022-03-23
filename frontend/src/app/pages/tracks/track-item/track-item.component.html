@@ -5,26 +5,42 @@
     <p *ngIf="!track.isPublished" class="not-published">Not published</p>
   </div>
   <mat-card-content fxLayout="row" fxLayoutGap="5px">
-    <div *appHasRole="['admin']">
-      <button mat-flat-button color="primary"
+    <ng-container *appHasRole="['admin']">
+      <button type="button"
+              mat-flat-button
+              color="primary"
               *ngIf="!track.isPublished"
               (click)="onPublish()"
-      >Publish</button>
-    </div>
-    <button mat-stroked-button
+              [disabled]="publishLoading | async"
+      >
+        <app-loader [isLoading]="publishLoading | async">Publish</app-loader>
+      </button>
+    </ng-container>
+    <button type="button"
+            mat-stroked-button
             color="primary"
             *ngIf="track.youtube"
             (click)="onOpenYoutube()"
-    >Play YouTube</button>
-    <button mat-flat-button color="primary"
+    >
+      Play YouTube
+    </button>
+    <button type="button"
+            mat-flat-button
+            color="primary"
             (click)="onListen()"
             [disabled]="isLoading"
     >
       <app-loader [isLoading]="isLoading" size="sm">Listen</app-loader>
     </button>
-    <button mat-flat-button color="warn"
-            (click)="onRemove()"
-            *appHasRole="['admin']"
-    >Remove</button>
+    <ng-container *appHasRole="['admin']">
+      <button type="button"
+              mat-flat-button
+              color="warn"
+              (click)="onRemove()"
+              [disabled]="removeLoading | async"
+      >
+        <app-loader [isLoading]="removeLoading | async">Remove</app-loader>
+      </button>
+    </ng-container>
   </mat-card-content>
 </mat-card>
