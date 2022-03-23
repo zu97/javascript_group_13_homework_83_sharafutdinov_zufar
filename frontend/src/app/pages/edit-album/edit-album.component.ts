@@ -7,6 +7,7 @@ import { Artist } from '../../models/artist.model';
 import { fetchArtistsRequest } from '../../store/artists.actions';
 import { AddAlbumData } from '../../models/album.model';
 import { addAlbumRequest } from '../../store/albums.actions';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-album',
@@ -22,6 +23,7 @@ export class EditAlbumComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
+    private route: ActivatedRoute,
   ) {
     this.isLoading = store.select(state => state.albums.addLoading);
     this.artists = store.select(state => state.artists.artists);
@@ -29,7 +31,23 @@ export class EditAlbumComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      const artistId = <undefined | string>params['artist'];
+
+      if (artistId) {
+        this.setArtistValue(artistId);
+      } else {
+        this.setArtistValue('');
+      }
+    });
+
     this.store.dispatch(fetchArtistsRequest());
+  }
+
+  setArtistValue(value: string) {
+    setTimeout(() => {
+      this.form.form.get('artist')?.setValue(value);
+    });
   }
 
   onSubmit(): void {
