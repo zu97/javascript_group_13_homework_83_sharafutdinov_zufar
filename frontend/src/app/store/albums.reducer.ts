@@ -5,7 +5,7 @@ import {
   addAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess,
+  fetchAlbumsSuccess, getAlbumFailure, getAlbumRequest, getAlbumSuccess,
   publishAlbumFailure,
   publishAlbumRequest,
   publishAlbumSuccess,
@@ -18,8 +18,10 @@ import { AlbumsState } from './types';
 const initialState: AlbumsState = {
   artist: null,
   albums: [],
+  album: null,
   fetchLoading: false,
   fetchError: null,
+  getLoading: false,
   addLoading: false,
   addError: null,
   publishLoading: false,
@@ -31,6 +33,10 @@ export const albumsReducer = createReducer(
   on(fetchAlbumsRequest, state => ({...state, fetchLoading: true})),
   on(fetchAlbumsSuccess, (state, { artist, albums }) => ({...state, artist, albums , fetchLoading: false})),
   on(fetchAlbumsFailure, (state, { error }) => ({...state, fetchLoading: false, fetchError: error})),
+
+  on(getAlbumRequest, state => ({...state, getLoading: true})),
+  on(getAlbumSuccess, (state, { album }) => ({...state, getLoading: false, album})),
+  on(getAlbumFailure, state => ({...state, getLoading: false})),
 
   on(addAlbumRequest, state => ({...state, addLoading: true, addError: null})),
   on(addAlbumSuccess, state => ({...state, addLoading: false})),

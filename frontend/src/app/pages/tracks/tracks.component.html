@@ -7,8 +7,37 @@
   >New track</a>
 </div>
 
-<app-loader [isLoading]="isLoading | async" size="lg">
+<app-loader [isLoading]="(albumLoading | async) || (tracksLoading | async)" size="lg">
   <div fxLayout="column" fxLayoutGap="16px">
-    <app-track-item *ngFor="let track of tracks | async" [track]="track"></app-track-item>
+    <mat-card fxLayout="row" *ngIf="album | async as $album">
+      <div>
+        <img mat-card-image
+             [src]="apiUrl + '/uploads/' + $album.image"
+             [alt]="$album.name"
+             class="album-img"
+        />
+      </div>
+      <mat-card-content>
+        <mat-card-title>{{ $album.name }}</mat-card-title>
+        <p><strong>Year: </strong>{{ $album.year }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Tracks</mat-card-title>
+    </mat-card>
+
+    <div fxLayout="column" fxLayoutGap="16px" *ngIf="(tracks | async)?.length; else emptyData">
+      <app-track-item *ngFor="let track of tracks | async" [track]="track"></app-track-item>
+    </div>
+
+    <ng-template #emptyData>
+      <mat-card fxLayout="row" fxLayoutAlign="center">
+        <mat-card-subtitle>
+          No information available
+        </mat-card-subtitle>
+      </mat-card>
+    </ng-template>
+
   </div>
 </app-loader>

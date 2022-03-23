@@ -7,7 +7,8 @@ import {
   addAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess,
+  fetchAlbumsSuccess, getAlbumFailure,
+  getAlbumRequest, getAlbumSuccess,
   publishAlbumFailure,
   publishAlbumRequest,
   publishAlbumSuccess,
@@ -36,8 +37,16 @@ export class AlbumsEffects {
     ofType(fetchAlbumsRequest),
     mergeMap(({ artistId }) => this.albumsService.fetchAlbumsWithArtist(artistId).pipe(
       map((result) => fetchAlbumsSuccess(result)),
-      catchError(() => of(fetchAlbumsFailure({error: 'Error fetch request'})))
-    ))
+      catchError(() => of(fetchAlbumsFailure({error: 'Error fetch request'}))),
+    )),
+  ));
+
+  getAlbum = createEffect(() => this.actions.pipe(
+    ofType(getAlbumRequest),
+    mergeMap(({ id }) => this.albumsService.getAlbum(id).pipe(
+      map((album) => getAlbumSuccess({album})),
+      this.helpersService.catchServerError(getAlbumFailure),
+    )),
   ));
 
   addAlbum = createEffect(() => this.actions.pipe(

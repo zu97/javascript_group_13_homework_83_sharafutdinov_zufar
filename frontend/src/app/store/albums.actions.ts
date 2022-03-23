@@ -1,10 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { AddAlbumData, Album, AlbumError } from '../models/album.model';
+import { AddAlbumData, Album, AlbumError, AlbumWithArtist } from '../models/album.model';
 import { Artist } from '../models/artist.model';
 
 export const fetchAlbumsRequest = createAction('[Albums] Fetch Request', props<{ artistId: string }>());
 export const fetchAlbumsSuccess = createAction('[Albums] Fetch Success', props<{ artist: Artist, albums: Album[]}>());
 export const fetchAlbumsFailure = createAction('[Albums] Fetch Failure', props<{ error: null | string}>());
+
+export const getAlbumRequest = createAction('[Albums] Get Request', props<{ id: string }>());
+export const getAlbumSuccess = createAction('[Albums] Get Success', props<{ album: AlbumWithArtist }>());
+export const getAlbumFailure = createAction('[Albums] Get Failure');
 
 export const addAlbumRequest = createAction('[Albums] Add Request', props<{ albumData: AddAlbumData }>());
 export const addAlbumSuccess = createAction('[Albums] Add Success');
