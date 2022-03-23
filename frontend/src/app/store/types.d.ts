@@ -1,5 +1,5 @@
 import { Artist, ArtistError } from '../models/artist.model';
-import { Album, AlbumError } from '../models/album.model';
+import { Album, AlbumError, AlbumWithArtist } from '../models/album.model';
 import { LoginError, RegisterError, User } from '../models/user.model';
 import { HistoryTrack, Track } from '../models/track.model';
 
@@ -9,19 +9,21 @@ export type ArtistsState = {
   fetchError: null | string,
   addLoading: boolean,
   addError: null | ArtistError,
-  publishLoading: boolean,
-  removeLoading: boolean,
+  publishLoading: false | string,
+  removeLoading: false | string,
 };
 
 export type AlbumsState = {
   artist: null | Artist,
   albums: Album[],
+  album: null | AlbumWithArtist,
   fetchLoading: boolean,
   fetchError: null | string,
+  getLoading: boolean,
   addLoading: boolean,
   addError: null | AlbumError,
-  publishLoading: boolean,
-  removeLoading: boolean,
+  publishLoading: false | string,
+  removeLoading: false | string,
 };
 
 export type UsersState = {
@@ -37,8 +39,8 @@ export type TracksState = {
   fetchLoading: boolean,
   addLoading: boolean,
   addError: null | AlbumError,
-  publishLoading: boolean,
-  removeLoading: boolean,
+  publishLoading: false | string,
+  removeLoading: false | string,
 
   historyTracks: HistoryTrack[],
   fetchHistoryLoading: boolean,

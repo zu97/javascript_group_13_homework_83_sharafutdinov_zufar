@@ -36,11 +36,11 @@ export const albumsReducer = createReducer(
   on(addAlbumSuccess, state => ({...state, addLoading: false})),
   on(addAlbumFailure, (state, {error}) => ({...state, addLoading: false, addError: error})),
 
-  on(publishAlbumRequest, state => ({...state, publishLoading: true})),
+  on(publishAlbumRequest, (state, { id }) => ({...state, publishLoading: id})),
   on(publishAlbumSuccess, state => ({...state, publishLoading: false})),
   on(publishAlbumFailure, state => ({...state, publishLoading: false})),
 
-  on(removeAlbumRequest, state => ({...state, removeLoading: true})),
+  on(removeAlbumRequest, (state, { id }) => ({...state, removeLoading: id})),
   on(removeAlbumSuccess, state => ({...state, removeLoading: false})),
   on(removeAlbumFailure, state => ({...state, removeLoading: false})),
 );

@@ -35,11 +35,11 @@ export const artistsReducer = createReducer(
   on(addArtistSuccess, state => ({...state, addLoading: false})),
   on(addArtistFailure, (state, {error}) => ({...state, addLoading: false, addError: error})),
 
-  on(publishArtistRequest, state => ({...state, publishLoading: true})),
+  on(publishArtistRequest, (state, { id }) => ({...state, publishLoading: id})),
   on(publishArtistSuccess, state => ({...state, publishLoading: false})),
   on(publishArtistFailure, state => ({...state, publishLoading: false})),
 
-  on(removeArtistRequest, state => ({...state, removeLoading: true})),
+  on(removeArtistRequest, (state, { id }) => ({...state, removeLoading: id})),
   on(removeArtistSuccess, state => ({...state, removeLoading: false})),
   on(removeArtistFailure, state => ({...state, removeLoading: false})),
 );

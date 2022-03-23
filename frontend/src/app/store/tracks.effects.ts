@@ -54,27 +54,27 @@ export class TracksEffects {
     ofType(addTrackRequest),
     mergeMap(({trackData}) => this.tracksService.addTrack(trackData).pipe(
       map(() => addTrackSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => void this.router.navigate(['/tracks', trackData.album])),
       this.helpersService.catchServerError(addTrackFailure),
-    ))
+    )),
   ));
 
   publishTrack = createEffect(() => this.actions.pipe(
     ofType(publishTrackRequest),
-    mergeMap(({id}) => this.tracksService.publishTrack(id).pipe(
+    mergeMap(({id, albumId}) => this.tracksService.publishTrack(id).pipe(
       map(() => publishTrackSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => this.store.dispatch(fetchTracksRequest({albumId}))),
       this.helpersService.catchServerError(publishTrackFailure),
-    ))
+    )),
   ));
 
   removeTrack = createEffect(() => this.actions.pipe(
     ofType(removeTrackRequest),
-    mergeMap(({id}) => this.tracksService.removeTrack(id).pipe(
+    mergeMap(({id, albumId}) => this.tracksService.removeTrack(id).pipe(
       map(() => removeTrackSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => this.store.dispatch(fetchTracksRequest({albumId}))),
       this.helpersService.catchServerError(removeTrackFailure),
-    ))
+    )),
   ));
 
   fetchHistoryTracks = createEffect(() => this.actions.pipe(

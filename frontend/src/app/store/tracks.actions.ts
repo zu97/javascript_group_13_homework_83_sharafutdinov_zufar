@@ -9,11 +9,11 @@ export const addTrackRequest = createAction('[Tracks] Add Request', props<{ trac
 export const addTrackSuccess = createAction('[Tracks] Add Success');
 export const addTrackFailure = createAction('[Tracks] Add Failure', props<{ error: null | TrackError }>());
 
-export const publishTrackRequest = createAction('[Tracks] Publish Request', props<{ id: string }>());
+export const publishTrackRequest = createAction('[Tracks] Publish Request', props<{ id: string, albumId: string }>());
 export const publishTrackSuccess = createAction('[Tracks] Publish Success');
 export const publishTrackFailure = createAction('[Tracks] Publish Failure');
 
-export const removeTrackRequest = createAction('[Tracks] Remove Request', props<{ id: string }>());
+export const removeTrackRequest = createAction('[Tracks] Remove Request', props<{ id: string, albumId: string }>());
 export const removeTrackSuccess = createAction('[Tracks] Remove Success');
 export const removeTrackFailure = createAction('[Tracks] Remove Failure');
 

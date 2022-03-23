@@ -44,11 +44,11 @@ export const tracksReducer = createReducer(
   on(addTrackSuccess, state => ({...state, addLoading: false})),
   on(addTrackFailure, (state, {error}) => ({...state, addLoading: false, addError: error})),
 
-  on(publishTrackRequest, state => ({...state, publishLoading: true})),
+  on(publishTrackRequest, (state, { id }) => ({...state, publishLoading: id})),
   on(publishTrackSuccess, state => ({...state, publishLoading: false})),
   on(publishTrackFailure, state => ({...state, publishLoading: false})),
 
-  on(removeTrackRequest, state => ({...state, removeLoading: true})),
+  on(removeTrackRequest, (state, { id }) => ({...state, removeLoading: id})),
   on(removeTrackSuccess, state => ({...state, removeLoading: false})),
   on(removeTrackFailure, state => ({...state, removeLoading: false})),
 

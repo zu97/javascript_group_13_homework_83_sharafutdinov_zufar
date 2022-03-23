@@ -34,7 +34,7 @@ export class AlbumsEffects {
 
   fetchAlbums = createEffect(() => this.actions.pipe(
     ofType(fetchAlbumsRequest),
-    mergeMap(({ id }) => this.albumsService.fetchAlbumsWithArtist(id).pipe(
+    mergeMap(({ artistId }) => this.albumsService.fetchAlbumsWithArtist(artistId).pipe(
       map((result) => fetchAlbumsSuccess(result)),
       catchError(() => of(fetchAlbumsFailure({error: 'Error fetch request'})))
     ))
@@ -44,27 +44,27 @@ export class AlbumsEffects {
     ofType(addAlbumRequest),
     mergeMap(({albumData}) => this.albumsService.addAlbum(albumData).pipe(
       map(() => addAlbumSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => void this.router.navigate(['/albums', albumData.artist])),
       this.helpersService.catchServerError(addAlbumFailure),
-    ))
+    )),
   ));
 
   publishAlbum = createEffect(() => this.actions.pipe(
     ofType(publishAlbumRequest),
-    mergeMap(({id}) => this.albumsService.publishAlbum(id).pipe(
+    mergeMap(({id, artistId}) => this.albumsService.publishAlbum(id).pipe(
       map(() => publishAlbumSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => this.store.dispatch(fetchAlbumsRequest({artistId}))),
       this.helpersService.catchServerError(publishAlbumFailure),
-    ))
+    )),
   ));
 
   removeAlbum = createEffect(() => this.actions.pipe(
     ofType(removeAlbumRequest),
-    mergeMap(({id}) => this.albumsService.removeAlbum(id).pipe(
+    mergeMap(({id, artistId}) => this.albumsService.removeAlbum(id).pipe(
       map(() => removeAlbumSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => this.store.dispatch(fetchAlbumsRequest({artistId}))),
       this.helpersService.catchServerError(removeAlbumFailure),
-    ))
+    )),
   ));
 
 }

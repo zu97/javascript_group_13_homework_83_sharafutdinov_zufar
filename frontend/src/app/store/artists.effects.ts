@@ -36,8 +36,8 @@ export class ArtistsEffects {
     ofType(fetchArtistsRequest),
     mergeMap(() => this.artistsService.fetchArtists().pipe(
       map((artists) => fetchArtistsSuccess({ artists })),
-      catchError(() => of(fetchArtistsFailure({ error: 'Error fetch request' })))
-    ))
+      catchError(() => of(fetchArtistsFailure({ error: 'Error fetch request' }))),
+    )),
   ));
 
   addArtist = createEffect(() => this.actions.pipe(
@@ -46,7 +46,7 @@ export class ArtistsEffects {
       map(() => addArtistSuccess()),
       tap(() => void this.router.navigate(['/'])),
       this.helpersService.catchServerError(addArtistFailure),
-    ))
+    )),
   ));
 
   publishArtist = createEffect(() => this.actions.pipe(
@@ -55,7 +55,7 @@ export class ArtistsEffects {
       map(() => publishArtistSuccess()),
       tap(() => this.store.dispatch(fetchArtistsRequest())),
       this.helpersService.catchServerError(publishArtistFailure),
-    ))
+    )),
   ));
 
   removeArtist = createEffect(() => this.actions.pipe(
@@ -64,7 +64,7 @@ export class ArtistsEffects {
       map(() => removeArtistSuccess()),
       tap(() => this.store.dispatch(fetchArtistsRequest())),
       this.helpersService.catchServerError(removeArtistFailure),
-    ))
+    )),
   ));
 
 }
