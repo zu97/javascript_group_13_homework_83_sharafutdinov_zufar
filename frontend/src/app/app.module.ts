@@ -44,6 +44,31 @@ import { EditArtistComponent } from './pages/edit-artist/edit-artist.component';
 import { EditAlbumComponent } from './pages/edit-album/edit-album.component';
 import { EditTrackComponent } from './pages/edit-track/edit-track.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule
+} from 'angularx-social-login';
+import { environment as env } from '../environments/environment';
+
+const socialAuthConfig: SocialAuthServiceConfig = {
+  autoLogin: false,
+  providers: [
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider(env.facebookAppId, {
+        scope: 'email,public_profile'
+      })
+    },
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider(env.googleAppId, {
+        scope: 'email profile'
+      })
+    }
+  ]
+};
 
 @NgModule({
   declarations: [
@@ -71,30 +96,32 @@ import { MatMenuModule } from '@angular/material/menu';
     EditAlbumComponent,
     EditTrackComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        LayoutModule,
-        MatProgressSpinnerModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatButtonModule,
-        FormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSnackBarModule,
-        AppStoreModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatBadgeModule,
-        MatMenuModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    LayoutModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    AppStoreModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatBadgeModule,
+    MatMenuModule,
+    SocialLoginModule
+  ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: 'SocialAuthServiceConfig', useValue: socialAuthConfig }
   ],
   bootstrap: [AppComponent]
 })
