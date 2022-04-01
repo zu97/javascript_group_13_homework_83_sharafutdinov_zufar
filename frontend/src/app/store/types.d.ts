@@ -32,6 +32,10 @@ export type UsersState = {
   registerError: null | RegisterError,
   loginLoading: boolean,
   loginError: null | LoginError,
+  facebookLoginLoading: boolean,
+  facebookLoginError: null | LoginError,
+  googleLoginLoading: boolean,
+  googleLoginError: null | LoginError,
 };
 
 export type TracksState = {
