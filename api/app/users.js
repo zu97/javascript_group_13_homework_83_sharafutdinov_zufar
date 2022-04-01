@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const { nanoid } = require('nanoid');
 const path = require('path');
+const axios = require('axios');
+const fs = require('fs');
 
 const User = require('../models/User');
 const config = require('../config');
@@ -90,6 +92,99 @@ router.delete('/sessions', async (req, res, next) => {
    } catch(e) {
        next(e);
    }
+});
+
+router.post('/facebookLogin', async (req, res, next) => {
+    try {
+        const authToken = req.body.authToken;
+        const accessToken = config.facebook.appId + '|' + config.facebook.appSecret;
+        const debugTokenUrl = `https://graph.facebook.com/debug_token?input_token=${authToken}&access_token=${accessToken}`;
+
+        const response = await axios.get(debugTokenUrl);
+
+        if (response.data.data.error) {
+            return res.status(401).send({message: 'Facebook token incorrect'});
+        }
+
+        if (response.data.data.user_id !== req.body.id) {
+            return res.status(401).send({message: 'Wrong user id'});
+        }
+
+        let user = await User.findOne({facebookId: req.body.id});
+        if (!user) {
+            const userData = {
+                email: req.body.email,
+                password: nanoid(),
+                displayName: req.body.name,
+                facebookId: req.body.id,
+            };
+
+            if (req.body.photoUrl) {
+                const photo = await axios.get(req.body.photoUrl, { responseType: 'stream' });
+                const photoName = nanoid() + '.jpg';
+
+                const photoPath = path.resolve(config.uploadPath, photoName);
+                photo.data.pipe(fs.createWriteStream(photoPath));
+
+                userData['avatar'] = photoName;
+            }
+
+            user = new User(userData);
+
+            user.generateToken();
+            await user.save();
+        }
+
+        res.send(user);
+    } catch(e) {
+        next(e);
+    }
+});
+
+router.post('/googleLogin', async (req, res, next) => {
+    try {
+        const authToken = req.body.authToken;
+        const debugTokenUrl = `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${authToken}`;
+
+        const response = await axios.get(debugTokenUrl);
+
+        if (response.data.error) {
+            return res.status(401).send({message: 'Google token incorrect'});
+        }
+
+        if (response.data.user_id !== req.body.id) {
+            return res.status(401).send({message: 'Wrong user id'});
+        }
+
+        let user = await User.findOne({googleId: req.body.id});
+        if (!user) {
+            const userData = {
+                email: req.body.email,
+                password: nanoid(),
+                displayName: req.body.name,
+                googleId: req.body.id,
+            };
+
+            if (req.body.photoUrl) {
+                const photo = await axios.get(req.body.photoUrl, { responseType: 'stream' });
+                const photoName = nanoid() + '.jpg';
+
+                const photoPath = path.resolve(config.uploadPath, photoName);
+                photo.data.pipe(fs.createWriteStream(photoPath));
+
+                userData['avatar'] = photoName;
+            }
+
+            user = new User(userData);
+
+            user.generateToken();
+            await user.save();
+        }
+
+        res.send(user);
+    } catch(e) {
+        next(e);
+    }
 });
 
 module.exports = router;

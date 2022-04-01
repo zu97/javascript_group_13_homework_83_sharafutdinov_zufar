@@ -63,6 +63,8 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    facebookId: String,
+    googleId: String,
 });
 
 const SALT_WORK_FACTOR = 10;
