@@ -40,14 +40,38 @@
         Field is required
       </mat-error>
     </mat-form-field>
-    <button type="submit"
-            mat-raised-button
-            color="primary"
-            [disabled]="f.invalid || (isLoading | async)"
-    >
-      <app-loader [isLoading]="isLoading | async" size="sm">
-        Login
-      </app-loader>
-    </button>
+    <div fxLayout="column" fxLayoutGap="16px">
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="f.invalid || (isLoading | async)"
+      >
+        <app-loader [isLoading]="isLoading | async" size="sm">
+          Login
+        </app-loader>
+      </button>
+      <button type="button"
+              mat-raised-button
+              (click)="fbLogin()"
+              [disabled]="(isFacebookLoading | async)"
+      >
+        <app-loader [isLoading]="isFacebookLoading | async" size="sm">
+          <img src="assets/icons/icons8-facebook.svg" alt="facebook">
+          &nbsp;&nbsp;
+          LOGIN WITH FACEBOOK
+        </app-loader>
+      </button>
+      <button type="button"
+              mat-raised-button
+              (click)="googleLogin()"
+              [disabled]="(isGoogleLoading | async)"
+      >
+        <app-loader [isLoading]="isGoogleLoading | async" size="sm">
+          <img src="assets/icons/icons8-google.svg" alt="google">
+          &nbsp;&nbsp;
+          LOGIN WITH GOOGLE
+        </app-loader>
+      </button>
+    </div>
   </form>
 </app-centered-card>
